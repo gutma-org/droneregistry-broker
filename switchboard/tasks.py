@@ -115,3 +115,8 @@ def QueryRegistries(jobid):
     sq.results = res
     sq.logs = myOpsLogger.get_allstatuses()
     sq.save()
+
+
+@task(name="Add")
+def Add(x, y):
+    return x + y
