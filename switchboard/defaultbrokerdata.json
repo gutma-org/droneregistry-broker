@@ -1,0 +1,20 @@
+[
+  {
+     "model":"switchboard.registry",
+     "pk":"c8ff93a8-7f45-4568-8b33-606f721f307b",
+     "fields":{
+        "endpoint":"https://registryA.herokuapp.com/api/v1",
+        "api_version":1,
+        "authentication":0
+     }
+  },
+  {
+     "model":"switchboard.registry",
+     "pk":"d4a42ba3-9fc9-4982-9b73-70b3e2fb82b9",
+     "fields":{
+        "endpoint":"http://registryB.herokuapp.com/api/v1",
+        "api_version":1,
+        "authentication":0
+     }
+  }
+]

@@ -1,0 +1,99 @@
+
+
+<!doctype html>
+{% load static %}
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="Hrishikesh Ballal">
+      <meta name="description" content="Drone Registry Broker">
+      <title>GUTMA-EASA Registry Broker</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+      <link rel="stylesheet" href="{% static "switchboard/css/wing.min.css" %}">
+   </head>
+   <body>
+      <div class="container">
+         <div class="nav">
+            <h2>GUTMA-EASA Registry Broker</h2>
+         </div>
+         <h4>What is this? </h4>
+         <p>Welcome to the GUTMA-EASA drone registry broker sandbox. This site has two things: 
+         <ul>
+            <li><a href="https://github.com/gutma-org/droneregistry/blob/master/documents/registration-white-paper.md" title="Whitepaper">Registry Broker Whitepaper</a>, read this first to familiarize yourself with the idea behind the broker.</li>
+            <li>The diagram below shows how the system works, the user enters a ID and the broker then queries multiple registries with that ID.</li>
+         </ul>
+         </p>
+         <br>
+         <div class="text-center">
+            <img width="500" src="{% static "switchboard/images/flow.jpg" %}">
+         </div>
+         <br>
+      </div>
+      <hr>
+      <div class="container card-container">
+         <h4>Query Multiple Registries</h4>
+         <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Query">
+         </form>
+         <br>
+         <br>
+         <h4>Sample Queries</h4>
+         <div class="cards">
+            <div class="card">
+               <h5 class="card-header">Operator in Registry A</h5>
+               <p class="card-body">The operator "Southern Ostrobothnia Photography" exists in Registry A with id <code>b02a91e2-824c-49a6-85f5-a60a7785a22d</code></p>
+               <div class="card-footer center text-center">
+                  <p><a href="https://registrya.herokuapp.com/api/v1/operators/b02a91e2-824c-49a6-85f5-a60a7785a22d" target="_blank">See in registry A</a></p>
+               </div>
+            </div>
+            <div class="card">
+               <h5 class="card-header">Contact in Registry B</h5>
+               <p class="card-body">A contact named Steffen Zimmermann exists in Registry B <code>08d42eec-248c-4a4d-8450-c2e71e97e194</code> for operator "Michael N Neudorf Photography".</p>
+               <div class="card-footer center text-center">
+                  <p><a href="https://registryb.herokuapp.com/api/v1/contacts/08d42eec-248c-4a4d-8450-c2e71e97e194" target="_blank">See in registry B</a></p>
+               </div>
+            </div>
+            <div class="card">
+               <h5 class="card-header">Pilot in Registry A</h5>
+               <p class="card-body">A pilot named Aune Äärilä exists in Registry A with a ID <code>d544e6f1-e19f-4261-8839-e4809d7ee9a6</code>, they are associated with "Electric Inspection" operator.</p>
+               <div class="card-footer center text-center">
+                  <p><a href="https://registrya.herokuapp.com/api/v1/pilots/d544e6f1-e19f-4261-8839-e4809d7ee9a6" target="_blank">See in registry A</a></p>
+               </div>
+            </div>
+            <div class="card">
+               <h5 class="card-header">Non-existant ID</h5>
+               <p class="card-body">Here is a random UUID that you can try to enter <code>c8ff93a8-8450-49a6-85f5-e4809d7ee9a6</code>, you can enter any UUID really.</p>
+               <div class="card-footer center text-center">
+                  <p>ID does not exist</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      <hr>
+      <div class="container">
+         <h4>How it works</h4>
+         <ul>
+            <li>There are two working prototypes of registries with some sample data, these simulate independent national registries. To keep things simple, the first registry is <code>registryA</code> and the second one is <code>registryB</code>. These are instances of the <a href="https://github.com/gutma-org/droneregistry">GUTMA droneregistry</a> repository. For e.g. You can explore operators in <a href="https://registrya.herokuapp.com/api/v1/operators">registryA</a> or <a href="http://registryb.herokuapp.com/api/v1/operators">registryB</a>.</li>
+            <li>You are asked to input a ID in the form below. It can be a RPAS-ID, Operator-ID or Pilot-ID, look at some sample queries below. The software then returns query token while it queries different registries. This token can be used to check your results by making further queries. We use the token system because it would help when many registries need to be queried and reponse times of some would be different than others. </li>
+            <li>The software only supports query by ID, it does not support query using common names e.g. Acme Drone Flights Pvt. Ltd. This is similar to the <a href="http://ec.europa.eu/taxation_customs/vies/">EU VAT query system (VIES)</a> that enables searching via ID and not by company name. </li>
+            <li>Authentication: Most common authentication methods are supported while disabled at this time, they can be easily added.</li>
+            <li>Throttling: This software uses Django REST Framework and any Throttling limits can also be easily added.</li>
+         </ul>
+      </div>
+      <div class="container">
+         <h4>Contributing</h4>
+         <p>Want to contribute? You can open <a href="https://github.com/gutma-org/droneregistry-broker/issues">issues on this repository</a>. Make comments at open issues to look at the current work in progress. 
+            <br><br><br>
+         <footer class="footer">
+            <div class="content has-text-centered">
+               <p>&copy; 2018 GUTMA. Licensed under the <a target="_blank" href="https://opensource.org/licenses/Apache-2.0" title="MIT License">Apache 2.0 License</a>. See the <a target="_blank" href="https://github.com/gutma-org/droneregistry-broker/" title="Github Repository">Github repository</a> for more details.</p>
+            </div>
+         </footer>
+      </div>
+   </body>
+</html>
+

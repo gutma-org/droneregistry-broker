@@ -1,0 +1,11 @@
+Django 
+django-heroku
+pyjwt
+python-dateutil
+psycopg2-binary
+gunicorn
+celery
+djangorestframework
+requests
+django_heroku
+redis
