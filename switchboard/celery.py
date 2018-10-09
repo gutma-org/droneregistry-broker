@@ -6,7 +6,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'droneregistry-broker.settings')
 
 from django.conf import settings  # noqa
 
-app = Celery('droneregistry-broker')
+app = Celery('switchboard')
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
