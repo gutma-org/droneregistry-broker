@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
                 ('query', models.CharField(max_length=140)),
-                ('query_type', models.IntegerField(choices=[(0, 'Regular'), (1, 'Privilaged')], default=0)),
+                ('query_type', models.IntegerField(choices=[(0, 'Regular'), (1, 'Privileged')], default=0)),
                 ('query_parameter', models.IntegerField(choices=[(0, 'Operator ID'), (1, 'RPAS ID'), (2, 'Pilot ID')], default=0)),
                 ('state', models.IntegerField(choices=[(0, 'PENDING'), (1, 'RECEIVED'), (2, 'STARTED'), (3, 'SUCCESS'), (4, 'RETRY'), (5, 'IGNORED')], default=0, verbose_name='state')),
                 ('results', models.TextField(default='Querying registries, this will populate once all queries are complete..')),

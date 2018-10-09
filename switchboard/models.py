@@ -31,7 +31,7 @@ class Registry(models.Model):
 
 class SearchQuery(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    TYPE_CHOICES = ((0, _('Regular')),(1, _('Privilaged')),)
+    TYPE_CHOICES = ((0, _('Regular')),(1, _('Privileged')),)
     PARAMETER_CHOICES = ((0, _('Operator ID')),(1, _('RPAS ID')),(2, _('Pilot ID')),)
     STATE_CHOICES = ((0, _('PENDING')),(1, _('RECEIVED')),(2, _('STARTED')),(3, _('SUCCESS')),(4, _('RETRY')),(5, _('IGNORED')),)
     
