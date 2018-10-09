@@ -1,4 +1,4 @@
-from .models import Registry, SearchQuery
+from switchboard.models import Registry, SearchQuery
 import requests
 import logging
 from celery.decorators import task
