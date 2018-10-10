@@ -5,5 +5,5 @@ class SearchQueryForm(ModelForm):
     
     class Meta:
         model = SearchQuery
-        fields = ['query_type','query_parameter','query']
+        fields = ['query_parameter','query']
         
