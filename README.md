@@ -1,8 +1,8 @@
-## GUTMA-EASA Registry Broker
+## GUTMA Registry Broker
 
-Welcome to the GUTMA-EASA drone registry broker sandbox. This site has three things: 
+Welcome to the GUTMA drone registry broker sandbox. This site has three things: 
 
-1. [Registry Broker Whitepaper](https://github.com/gutma-org/droneregistry-broker/blob/master/documents/Registration-Brokerage-Specification.pdf), read this first to familiarize yourself with the idea behind the broker. 
+1. [Registry Broker Whitepaper](https://github.com/gutma-org/droneregistry-broker/blob/master/documents/Registration-Brokerage-Specification.pdf), read this first to familiarize yourself with idea behind the broker. 
 
 
 2. Two working registries with sample data. The first registry is `registryA`  and the second one is `registryB`. These are instances of the GUTMA droneregistry repository. You can explore operators in [registryA](http://registrya.herokuapp.com/api/v1/operators) or [registryB](http://registryb.herokuapp.com/api/v1/operators). These are independent registries and try to simulate national registries. 
