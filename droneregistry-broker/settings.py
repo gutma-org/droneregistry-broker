@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^z_a@yyzuplya(g*9!9gn2s^jl-&c&i_ulqm8m*5qkx9q0@_k-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',    
     'rest_framework',
+    'social_django',
     'switchboard'
 ]
 
@@ -51,6 +52,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+AUTHENTICATION_BACKENDS = {
+    'auth0login.auth0backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend'
+}
+
+LOGIN_URL = '/login/auth0'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 ROOT_URLCONF = 'droneregistry-broker.urls'
 
@@ -116,6 +127,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
+SOCIAL_AUTH_AUTH0_DOMAIN = 'testflight.eu.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY = 'TQgh8MsK2F2dM2F8mi35q0Fq2e1Rvxqv'
+SOCIAL_AUTH_AUTH0_SECRET = ''
+SOCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile'
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

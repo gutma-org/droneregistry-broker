@@ -25,6 +25,8 @@ from switchboard import views as switchboardviews
 urlpatterns = [
     path('', switchboardviews.HomeView.as_view()),
     path('api/v1/jobs/<uuid:pk>', switchboardviews.SearchDetails.as_view(), name="search_details"),
+    url(r'^', include('auth0login.urls'))
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

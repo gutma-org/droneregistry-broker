@@ -18,6 +18,16 @@
          <div class="nav">
             <h2>GUTMA Registry Broker</h2>
          </div>
+         
+         {% if auth0User %}
+         <img class="avatar" src="{{ auth0User.extra_data.picture }}"/>
+         
+               <h4>Welcome {{ user.username }}</h4>
+               <pre>{{ user.email }}</pre>
+               <a class="btn btn-primary btn-lg btn-logout btn-block" href="/logout">Logout</a>
+         {% else %}
+         <p> <a class="btn btn-primary btn-lg btn-login btn-block" href="/login/auth0">Log In</a></p>
+         {% endif %}
          <h4>What is this? </h4>
          <p>Welcome to the GUTMA drone registry broker sandbox. This site has two things: 
          <ul>

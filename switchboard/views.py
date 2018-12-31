@@ -57,10 +57,14 @@ class HomeView(CreateView):
     template_name = 'switchboard/index.html'
     form_class = SearchQueryForm
     
-    
+   
     def get_success_url(self):	
+
         QueryRegistries.delay(jobid = self.object.id)
-        return reverse('search_details',args=(self.object.id,))
+        content = {'Location': '/api/v1/' + self.object.id}
+        return Response(content, status=status.HTTP_202_ACCEPTED)
+        
+        # return reverse('search_details',args=(self.object.id,))
 
 
 
