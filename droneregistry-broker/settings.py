@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',    
     'rest_framework',
-    'social_django',
     'switchboard'
 ]
 
@@ -55,13 +54,9 @@ MIDDLEWARE = [
 
 
 AUTHENTICATION_BACKENDS = {
-    'auth0login.auth0backend.Auth0',
     'django.contrib.auth.backends.ModelBackend'
 }
 
-LOGIN_URL = '/login/auth0'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
 ROOT_URLCONF = 'droneregistry-broker.urls'
 
@@ -127,15 +122,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
-SOCIAL_AUTH_AUTH0_DOMAIN = 'testflight.eu.auth0.com'
-SOCIAL_AUTH_AUTH0_KEY = 'TQgh8MsK2F2dM2F8mi35q0Fq2e1Rvxqv'
-SOCIAL_AUTH_AUTH0_SECRET = ''
-SOCIAL_AUTH_AUTH0_SCOPE = [
-    'openid',
-    'profile'
-]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
