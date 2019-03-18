@@ -38,6 +38,7 @@ class SearchQuery(models.Model):
     query = models.CharField(max_length=140)
     query_type = models.IntegerField(choices=TYPE_CHOICES, default=0)
     query_parameter = models.IntegerField(choices=PARAMETER_CHOICES, default=0)
+    credentials = models.TextField(default = '')
 
     state = models.IntegerField(_('state'),choices=STATE_CHOICES, default = 0)
     results = models.TextField(default="Querying registries, this will populate once all queries are complete..")

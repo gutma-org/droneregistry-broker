@@ -58,13 +58,11 @@ class SearchQueryStatusLogger(object):
 class BrokerManager(object):
     ''' A helper class to query different registries ''' 
     
-    def __init__(self, query_type, query_parameter, query):
+    def __init__(self, query_type, query_parameter, query, credentials):
         self.query_type = query_type
         self.query_parameter = query_parameter
-        self.query = query
-        
-
-
+        self.query = query      
+        self.credentials = credentials
 
     def get_endpoint(self, registry_endpoint):
         parameter_endpoint = {0: '/operators/', 1: '/rpas/', 2:'/pilot/'}
@@ -76,10 +74,12 @@ class BrokerManager(object):
         registry_endpoint = registry.endpoint
         url_to_query = self.get_endpoint(registry_endpoint = registry_endpoint)
         url_to_query = url_to_query + self.query
+        bearer_token = "Bearer " + self.credentials
+        headers = {"Authorization": bearer_token}
 
         # query different registries
         try:
-            r = requests.get(url_to_query)
+            r = requests.get(url_to_query, headers = headers)
         except requests.exceptions.ConnectionError as ce:
             logger.add_error(registry_id = registry_id , msg = "Connection error %s" % ce)
         except requests.exceptions.Timeout as te:
@@ -102,7 +102,7 @@ def QueryRegistries(jobid):
     
     myOpsLogger = SearchQueryStatusLogger(registries)
     
-    myBrokerHelper = BrokerManager( query_type = sq.query_type, query_parameter= sq.query_parameter, query = sq.query)
+    myBrokerHelper = BrokerManager( query_type = sq.query_type, query_parameter= sq.query_parameter, query = sq.query, credentials = sq.credentials)
                 
     res = []
     for registry in registries:

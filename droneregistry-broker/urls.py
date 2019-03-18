@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
@@ -24,8 +25,7 @@ from switchboard import views as switchboardviews
 
 urlpatterns = [
     path('', switchboardviews.HomeView.as_view()),
-    path('api/v1/jobs/<uuid:pk>', switchboardviews.SearchDetails.as_view(), name="search_details"),
-    url(r'^', include('auth0login.urls'))
+    path('api/v1/jobs/<uuid:pk>', switchboardviews.SearchDetails.as_view(), name="search_details"),    
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
