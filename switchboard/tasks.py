@@ -65,7 +65,7 @@ class BrokerManager(object):
         self.credentials = credentials
 
     def get_endpoint(self, registry_endpoint):
-        parameter_endpoint = {0: '/operators/', 1: '/rpas/', 2:'/pilot/'}
+        parameter_endpoint = {0: '/operators/', 1: '/aircraft/', 2:'/pilot/'}
         query_url = registry_endpoint + parameter_endpoint[self.query_parameter]
         return query_url
 
