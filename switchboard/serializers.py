@@ -7,5 +7,5 @@ class SearchQuerySerializer(serializers.ModelSerializer):
     ''' This is the default serializer for a Job '''
     class Meta:
         model = SearchQuery
-        fields = ('id', 'query_type', 'query', 'query_parameter',
+        fields = ('id', 'query_type', 'query', 'query_parameter','more_information_url',
                    'results')

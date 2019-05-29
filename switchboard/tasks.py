@@ -65,17 +65,22 @@ class BrokerManager(object):
         self.credentials = credentials
 
     def get_endpoint(self, registry_endpoint):
-        parameter_endpoint = {0: '/operators/', 1: '/aircraft/', 2:'/pilot/'}
+        parameter_endpoint = {0: '/operators/', 1: '/aircraft/', 2:'/pilots/'}
         query_url = registry_endpoint + parameter_endpoint[self.query_parameter]
         return query_url
 
     def search_registry(self, registry, logger):
         registry_id = str(registry.id)
         registry_endpoint = registry.endpoint
+        to_authenticate = registry.authentication
         url_to_query = self.get_endpoint(registry_endpoint = registry_endpoint)
         url_to_query = url_to_query + self.query
         bearer_token = "Bearer " + self.credentials
-        headers = {"Authorization": bearer_token}
+        if to_authenticate:
+            headers = {"Authorization": bearer_token}
+        else: 
+            headers = {}
+
 
         # query different registries
         try:
@@ -109,10 +114,16 @@ def QueryRegistries(jobid):
         results = myBrokerHelper.search_registry(registry = registry,logger = myOpsLogger)      
         if results and results['id']:  
             res.append(results)
+            parameter_endpoint = {0: '/operators/', 1: '/aircraft/', 2:'pilots/'}
+            from urllib.parse import urlparse
+            parsed_uri = urlparse(registry.endpoint)
+            registry_base_url= '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
+            more_information_url = registry_base_url + parameter_endpoint[sq.query_parameter]+ sq.query
         else:
             myOpsLogger.add_warning(registry_id = str(registry.id), msg= "Data returned but does not contain the ID")
 
     sq.results = res
+    sq.more_information_url = more_information_url
     sq.logs = myOpsLogger.get_allstatuses()
     sq.save()
 
